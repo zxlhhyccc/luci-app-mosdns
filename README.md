@@ -9,15 +9,31 @@
 - Openwrt official SnapShots
 
   ```shell
+  # remove v2ray-geodata package from feeds (openwrt-22.03 & master)
+  rm -rf feeds/packages/net/v2ray-geodata
+
   git clone https://github.com/sbwml/luci-app-mosdns package/mosdns
-  git clone https://github.com/sbwml/v2ray-geodata package/geodata
+  git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
+  make menuconfig # choose LUCI -> Applications -> luci-app-mosdns
+  make V=s
+  ```
+
+- Non-Openwrt official source
+
+  ```shell
+  # drop mosdns and v2ray-geodata packages that come with the source
+  find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
+  find ./ | grep Makefile | grep mosdns | xargs rm -f
+
+  git clone https://github.com/sbwml/luci-app-mosdns package/mosdns
+  git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
   make menuconfig # choose LUCI -> Applications -> luci-app-mosdns
   make V=s
   ```
 
 --------------
 
-## How to install prebuilt packages (OpenWrt 18 & 19 & 21 & 22 & master)
+## How to install prebuilt packages
 
 - Login OpenWrt terminal (SSH)
 
@@ -29,10 +45,11 @@
 
 - Execute install script (Multi-architecture support)
   ```shell
-  sh -c "$(curl -sS https://raw.githubusercontent.com/sbwml/luci-app-mosdns/master/install.sh)"
+  sh -c "$(curl -ksS https://raw.githubusercontent.com/sbwml/luci-app-mosdns/master/install.sh)"
   ```
 
 --------------
 
-![](https://user-images.githubusercontent.com/16485166/184607725-a147edda-07a0-41e9-be33-83b878926e6c.png)
+![](https://user-images.githubusercontent.com/16485166/206000249-3fdc64ea-cb4d-47f6-8247-c029f54e405e.png)
+
 
